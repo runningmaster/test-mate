@@ -1,2 +1,1 @@
-# test-mate
-mate-kiev.com check (go, golang)
+I like to drink mate. Therefore I need to check all of mate-kiev.com's proposals quickly.

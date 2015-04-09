@@ -18,9 +18,15 @@ import (
 
 var (
 	sections = [...]string{
-		"kupit-mate-2.html",
-		"paragvayskiy-mate.html",
-		"brazilskiy-mate.html",
+		"shop/kupit-mate-2.html",
+		"shop/paragvayskiy-mate.html",
+		"shop/brazilskiy-mate.html",
+	}
+	sections_FIXME = [...]string{
+		"category_148_show_all.html",
+		"category_72_show_all.html",
+		"category_54_show_all.html",
+		"category_68_show_all.html",
 	}
 )
 
@@ -60,6 +66,7 @@ func main() {
 		filterText = os.Args[1]
 	}
 
+	fmt.Printf("%s\n", makeCompleteURL(""))
 	var count int
 	for _, v := range results {
 		if strings.Contains(strings.ToLower(v), strings.ToLower(filterText)) {
@@ -67,8 +74,14 @@ func main() {
 			count++
 		}
 	}
-
 	fmt.Printf("Count: %d Elapsed time: %s\n", count, time.Since(start).String())
+
+	//FIXME
+	start = time.Now()
+	results = results[0:0]
+	fmt.Printf("%s\n", makeCompleteURL(""))
+	fmt.Printf("Count: %d Elapsed time: %s\n", count, time.Since(start).String())
+
 }
 
 func grabSection(url string, wg *sync.WaitGroup, c chan<- string) {
@@ -113,8 +126,16 @@ func grabPage(url string, wg *sync.WaitGroup, c chan<- string) {
 	})
 }
 
+func grabPage_FIXME(url string, wg *sync.WaitGroup, c chan<- string) {
+	//
+}
+
 func makeCompleteURL(url string) string {
-	return fmt.Sprintf("http://mate-kiev.com/shop/%s", url)
+	return fmt.Sprintf("http://mate-kiev.com/%s", url)
+}
+
+func makeCompleteURL_FIXME(url string) string {
+	return fmt.Sprintf("http://www.mate-tea.in.ua/%s", url)
 }
 
 func convRdrWin1251toUTF8(r io.Reader) io.Reader {
